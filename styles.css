@@ -30,6 +30,16 @@ a:hover { text-decoration: underline; }
   padding: 20px 18px 40px;
 }
 
+.hero-photo {
+  width: min(760px, calc(100% - 20px));
+  height: clamp(300px, 54vw, 540px);
+  margin: 26px auto 0;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0)),
+    url("./assets/pareja.jpg") center 38% / cover no-repeat;
+}
+
 .top-nav {
   display: flex;
   gap: 14px;
@@ -96,6 +106,14 @@ h1 {
   border: 1px solid var(--line);
   padding: 28px;
   text-align: center;
+}
+
+.venue-photo {
+  width: 100%;
+  height: clamp(240px, 46vw, 460px);
+  margin: 0 0 18px;
+  border: 1px solid var(--line);
+  background: url("./assets/piscina.jpg") center / cover no-repeat;
 }
 
 .card h4 {

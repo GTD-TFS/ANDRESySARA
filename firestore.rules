@@ -1,0 +1,75 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.enabled == true;
+    }
+
+    function isShortString(v, min, max) {
+      return v is string && v.size() >= min && v.size() <= max;
+    }
+
+    match /settings/event {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /responses/{responseId} {
+      allow create: if !exists(/databases/$(database)/documents/responses/$(responseId))
+        && request.resource.data.keys().hasOnly([
+          'createdAt',
+          'source',
+          'firstName',
+          'lastName',
+          'fullName',
+          'contactRef',
+          'attendance',
+          'companionsCount',
+          'dietaryRestriction',
+          'dietaryNotes',
+          'busNeeded',
+          'busReturnTime',
+          'mainDish',
+          'songRequest',
+          'comments',
+          'dedupeKey',
+          'status'
+        ])
+        && request.resource.data.source == 'public-form'
+        && request.resource.data.attendance in ['yes', 'no', 'maybe']
+        && request.resource.data.busNeeded in ['', 'yes', 'no']
+        && request.resource.data.busReturnTime in ['', '03:00', '06:00']
+        && request.resource.data.status == 'active'
+        && request.resource.data.companionsCount is int
+        && request.resource.data.companionsCount >= 0
+        && request.resource.data.companionsCount <= 8
+        && request.resource.data.dietaryRestriction is bool
+        && request.resource.data.createdAt == request.time
+        && isShortString(request.resource.data.firstName, 1, 80)
+        && isShortString(request.resource.data.lastName, 1, 120)
+        && isShortString(request.resource.data.fullName, 2, 220)
+        && isShortString(request.resource.data.contactRef, 3, 120)
+        && isShortString(request.resource.data.dedupeKey, 64, 64)
+        && request.resource.data.dietaryNotes is string
+        && request.resource.data.dietaryNotes.size() <= 400
+        && request.resource.data.mainDish is string
+        && request.resource.data.mainDish.size() <= 120
+        && request.resource.data.songRequest is string
+        && request.resource.data.songRequest.size() <= 180
+        && request.resource.data.comments is string
+        && request.resource.data.comments.size() <= 600;
+
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /admins/{uid} {
+      allow read, write: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Andres & Sara</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700&family=Barlow+Condensed:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="admin-shell">
+      <section class="admin-head">
+        <h1>Panel Novia</h1>
+        <div>
+          <button id="loginBtn">Entrar con GitHub</button>
+          <button id="logoutBtn" style="display:none">Cerrar sesión</button>
+        </div>
+      </section>
+
+      <p id="adminStatus">Inicia sesión para ver respuestas.</p>
+
+      <section class="kpis" id="kpis" style="display:none">
+        <article class="kpi"><h3>Total</h3><p id="kpiTotal">0</p></article>
+        <article class="kpi"><h3>Asisten</h3><p id="kpiYes">0</p></article>
+        <article class="kpi"><h3>No asisten</h3><p id="kpiNo">0</p></article>
+        <article class="kpi"><h3>Dudosos</h3><p id="kpiMaybe">0</p></article>
+        <article class="kpi"><h3>Acompañantes</h3><p id="kpiCompanions">0</p></article>
+        <article class="kpi"><h3>Bus sí</h3><p id="kpiBusYes">0</p></article>
+      </section>
+
+      <section id="tableWrap" style="display:none">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Nombre</th>
+              <th>Asistencia</th>
+              <th>Acomp.</th>
+              <th>Bus</th>
+              <th>Plato</th>
+              <th>Dieta</th>
+            </tr>
+          </thead>
+          <tbody id="responsesBody"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script type="module" src="./admin.js"></script>
+  </body>
+</html>

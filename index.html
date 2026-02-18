@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andres & Sara | Boda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700&family=Barlow+Condensed:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="hero" id="inicio">
+      <nav class="top-nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#evento">Evento</a>
+        <a href="#transporte">Autobuses</a>
+        <a href="#rsvp">RSVP</a>
+      </nav>
+      <div class="hero-inner">
+        <p class="overline">Te esperamos</p>
+        <h1 id="coupleNames">ANDRES & SARA</h1>
+        <p class="date" id="eventDateLabel">20 SEPTIEMBRE 2026</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="countdown-section section">
+        <h2><span id="daysLeft">0</span> días para nuestra boda</h2>
+        <p id="saveTheDate">Resérvate la fecha</p>
+      </section>
+
+      <section class="section" id="evento">
+        <h3 class="section-title">Lugar del evento</h3>
+        <div class="card">
+          <h4>Ceremonia</h4>
+          <p class="time" id="ceremonyTime">19:00</p>
+          <p id="ceremonyAddress">Dirección pendiente</p>
+          <p><a id="ceremonyMapLink" href="#" target="_blank" rel="noopener">Ver mapa</a></p>
+        </div>
+      </section>
+
+      <section class="section" id="transporte">
+        <h3 class="section-title">Lugar de recogida</h3>
+        <div class="card">
+          <h4>Autobuses</h4>
+          <p class="time" id="pickupTime">18:00</p>
+          <p id="pickupAddress">Dirección pendiente</p>
+          <p><a id="pickupMapLink" href="#" target="_blank" rel="noopener">Ver mapa</a></p>
+        </div>
+      </section>
+
+      <section class="section" id="rsvp">
+        <h3 class="section-title">RSVP</h3>
+        <p class="intro">
+          Estamos deseando compartir este día contigo. Por favor, confirma tu asistencia y cuéntanos tus preferencias.
+        </p>
+
+        <form id="rsvpForm" class="rsvp-form">
+          <label>Nombre *<input type="text" name="firstName" required /></label>
+          <label>Apellido *<input type="text" name="lastName" required /></label>
+          <label>Teléfono o email *<input type="text" name="contactRef" required /></label>
+
+          <fieldset>
+            <legend>¿Va a asistir? *</legend>
+            <label><input type="radio" name="attendance" value="yes" required /> Sí, por supuesto</label>
+            <label><input type="radio" name="attendance" value="maybe" /> Aún no lo sé</label>
+            <label><input type="radio" name="attendance" value="no" /> No voy a poder</label>
+          </fieldset>
+
+          <label>¿Cuántos acompañantes? *<input type="number" name="companionsCount" min="0" max="8" value="0" required /></label>
+
+          <label class="inline-checkbox">
+            <input type="checkbox" name="dietaryRestriction" />
+            ¿Tienes restricción dietética?
+          </label>
+
+          <label>Detalles dietéticos<textarea name="dietaryNotes" rows="3" placeholder="Alergias, intolerancias, vegetariano..."></textarea></label>
+
+          <fieldset class="attendance-only">
+            <legend>Autobús para la ida *</legend>
+            <label><input type="radio" name="busNeeded" value="yes" /> Sí, cuenta conmigo</label>
+            <label><input type="radio" name="busNeeded" value="no" /> No, iré por mi cuenta</label>
+          </fieldset>
+
+          <fieldset class="attendance-only">
+            <legend>Hora de vuelta</legend>
+            <label><input type="radio" name="busReturnTime" value="03:00" /> 03:00</label>
+            <label><input type="radio" name="busReturnTime" value="06:00" /> 06:00</label>
+          </fieldset>
+
+          <fieldset class="attendance-only">
+            <legend>Plato principal *</legend>
+            <label><input type="radio" name="mainDish" value="Carillada ibérica" /> Carillada ibérica</label>
+            <label><input type="radio" name="mainDish" value="Lomo de dorada" /> Lomo de dorada</label>
+            <label><input type="radio" name="mainDish" value="Menú infantil" /> Menú infantil</label>
+          </fieldset>
+
+          <label class="attendance-only">Canción sugerida<input type="text" name="songRequest" /></label>
+          <label>Comentarios<textarea name="comments" rows="4"></textarea></label>
+
+          <button type="submit" id="submitBtn">Enviar</button>
+          <p class="status" id="formStatus"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Con amor, Andres & Sara</p>
+      <p><a href="./admin.html">Acceso novia (admin)</a></p>
+    </footer>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

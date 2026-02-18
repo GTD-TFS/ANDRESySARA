@@ -12,6 +12,7 @@ export const defaultEvent = {
   eventDate: "2026-07-11T19:00:00",
   rsvpDeadline: "2026-06-20",
   eventVenue: {
+    name: "Finca El Capricho",
     address: "Carretera de Almuradiel, s/n, Calzada de Calatrava, Ciudad Real, España",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Carretera+de+Almuradiel+s%2Fn%2C+Calzada+de+Calatrava%2C+Ciudad+Real"
   },
@@ -23,6 +24,6 @@ export const defaultEvent = {
   transport: {
     pickupTime: "18:00",
     pickupAddress: "Plaza San Francisco, 13001 Ciudad Real, España",
-    pickupMapUrl: "https://maps.google.com"
+    pickupMapUrl: "https://www.google.com/maps/search/?api=1&query=Plaza+San+Francisco%2C+13001%2C+Ciudad+Real%2C+Espa%C3%B1a"
   }
 };

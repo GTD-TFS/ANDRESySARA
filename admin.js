@@ -59,6 +59,7 @@ function renderRows(items) {
       <td>${created}</td>
       <td>${r.fullName ?? ""}</td>
       <td>${r.attendance ?? ""}</td>
+      <td>${r.policeNationalGala === "yes" ? "Sí" : "No"}</td>
       <td>${r.companionsCount ?? 0}</td>
       <td>${r.busNeeded ?? ""} ${r.busReturnTime ?? ""}</td>
       <td>${r.mainDish ?? ""}</td>

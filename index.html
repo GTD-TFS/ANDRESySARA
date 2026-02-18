@@ -37,6 +37,7 @@
         <div class="location-cards">
           <div class="card">
             <h4>Lugar del evento</h4>
+            <p><strong id="eventVenueName">Finca El Capricho</strong></p>
             <p id="eventVenueAddress">Dirección pendiente</p>
             <p><a id="eventVenueMapLink" href="#" target="_blank" rel="noopener">Ver mapa</a></p>
           </div>
@@ -62,7 +63,9 @@
       <section class="section" id="rsvp">
         <h3 class="section-title">RSVP</h3>
         <p class="intro">
-          Estamos deseando compartir este día contigo. Por favor, confirma tu asistencia y cuéntanos tus preferencias.
+          Estamos deseando compartir este día tan especial contigo. Si vendrás acompañado o acompañada, o tienes alguna
+          necesidad alimentaria específica, no olvides indicarlo más abajo. Te agradeceríamos que confirmaras tu
+          asistencia antes del 4 de julio de 2026. Muchas gracias.
         </p>
 
         <form id="rsvpForm" class="rsvp-form">
@@ -77,6 +80,12 @@
             <label><input type="radio" name="attendance" value="no" /> No voy a poder</label>
           </fieldset>
 
+          <fieldset>
+            <legend>¿Eres Policía Nacional y puedes acudir con traje de gala? *</legend>
+            <label><input type="radio" name="policeNationalGala" value="yes" required /> Sí</label>
+            <label><input type="radio" name="policeNationalGala" value="no" /> No</label>
+          </fieldset>
+
           <label>¿Cuántos acompañantes? *<input type="number" name="companionsCount" min="0" max="8" value="0" required /></label>
 
           <label class="inline-checkbox">
@@ -87,25 +96,24 @@
           <label>Detalles dietéticos<textarea name="dietaryNotes" rows="3" placeholder="Alergias, intolerancias, vegetariano..."></textarea></label>
 
           <fieldset class="attendance-only">
-            <legend>Autobús para la ida *</legend>
-            <label><input type="radio" name="busNeeded" value="yes" /> Sí, cuenta conmigo</label>
+            <legend>Sabemos que no es la parte más divertida de la boda, pero nos haces un gran favor diciéndonos si necesitas autobús para ir a la finca. *</legend>
+            <label><input type="radio" name="busNeeded" value="yes" /> Sí, cuenta conmigo para el autobús</label>
             <label><input type="radio" name="busNeeded" value="no" /> No, iré por mi cuenta</label>
           </fieldset>
 
           <fieldset class="attendance-only">
-            <legend>Hora de vuelta</legend>
-            <label><input type="radio" name="busReturnTime" value="03:00" /> 03:00</label>
-            <label><input type="radio" name="busReturnTime" value="06:00" /> 06:00</label>
+            <legend>Y a la hora de la vuelta, ¿hasta qué hora podrás darlo todo?</legend>
+            <label><input type="radio" name="busReturnTime" value="03:00" /> Hasta las 3 de la mañana</label>
+            <label><input type="radio" name="busReturnTime" value="06:00" /> Hasta las 6 de la mañana</label>
           </fieldset>
 
           <fieldset class="attendance-only">
-            <legend>Plato principal *</legend>
-            <label><input type="radio" name="mainDish" value="Carillada ibérica" /> Carillada ibérica</label>
-            <label><input type="radio" name="mainDish" value="Lomo de dorada" /> Lomo de dorada</label>
-            <label><input type="radio" name="mainDish" value="Menú infantil" /> Menú infantil</label>
+            <legend>Y para que disfrutes al máximo, ¿qué te gustaría como plato principal? *</legend>
+            <label><input type="radio" name="mainDish" value="Saquito de lubina y marisco con salsa de amaretto y crujiente de puerros." /> Saquito de lubina y marisco con salsa de amaretto y crujiente de puerros.</label>
+            <label><input type="radio" name="mainDish" value="Milhojas de solomillo con foie, jamón y boletus en salsa PX y parmentier trufada." /> Milhojas de solomillo con foie, jamón y boletus en salsa PX y parmentier trufada.</label>
           </fieldset>
 
-          <label class="attendance-only">Canción sugerida<input type="text" name="songRequest" /></label>
+          <label class="attendance-only">Y por último, queremos aprovecharnos un poco de tus gustos musicales. Una canción une mucho y seguro que hay alguna que te recuerde a nosotros. Cuéntanos cuál es y prometemos ponerla a sonar en la boda.<input type="text" name="songRequest" /></label>
           <label>Comentarios<textarea name="comments" rows="4"></textarea></label>
 
           <button type="submit" id="submitBtn">Enviar</button>

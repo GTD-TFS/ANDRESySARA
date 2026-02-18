@@ -27,6 +27,7 @@ function setEventUI(data) {
   }).toUpperCase();
   document.querySelector("#saveTheDate").textContent = `Resérvate la fecha, ${eventDate.toLocaleDateString("es-ES")}`;
   const eventVenue = data.eventVenue || {
+    name: defaultEvent.eventVenue.name,
     address: data.ceremony?.address || defaultEvent.eventVenue.address,
     mapsUrl: data.ceremony?.mapsUrl || defaultEvent.eventVenue.mapsUrl
   };
@@ -35,6 +36,7 @@ function setEventUI(data) {
     address: defaultEvent.church.address,
     mapsUrl: defaultEvent.church.mapsUrl
   };
+  document.querySelector("#eventVenueName").textContent = eventVenue.name || defaultEvent.eventVenue.name;
   document.querySelector("#eventVenueAddress").textContent = eventVenue.address;
   document.querySelector("#eventVenueMapLink").href = eventVenue.mapsUrl;
   document.querySelector("#churchTime").textContent = church.time;
@@ -94,6 +96,7 @@ form.addEventListener("submit", async (event) => {
   const firstName = String(fd.get("firstName") || "").trim();
   const lastName = String(fd.get("lastName") || "").trim();
   const contactRef = String(fd.get("contactRef") || "").trim();
+  const policeNationalGala = String(fd.get("policeNationalGala") || "");
   const normalizedKey = `${normalizeText(firstName)}|${normalizeText(lastName)}|${normalizeText(contactRef)}`;
   const dedupeKey = await sha256Hex(normalizedKey);
 
@@ -105,6 +108,7 @@ form.addEventListener("submit", async (event) => {
     fullName: `${firstName} ${lastName}`.trim(),
     contactRef,
     attendance,
+    policeNationalGala,
     companionsCount: Number(fd.get("companionsCount") || 0),
     dietaryRestriction: fd.get("dietaryRestriction") === "on",
     dietaryNotes: String(fd.get("dietaryNotes") || "").trim(),
@@ -117,7 +121,7 @@ form.addEventListener("submit", async (event) => {
     status: "active"
   };
 
-  if (!attendance || !firstName || !lastName || !contactRef) {
+  if (!attendance || !firstName || !lastName || !contactRef || !policeNationalGala) {
     statusEl.textContent = "Revisa los campos obligatorios.";
     submitBtn.disabled = false;
     return;

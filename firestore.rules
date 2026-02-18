@@ -26,6 +26,7 @@ service cloud.firestore {
           'fullName',
           'contactRef',
           'attendance',
+          'policeNationalGala',
           'companionsCount',
           'dietaryRestriction',
           'dietaryNotes',
@@ -39,6 +40,7 @@ service cloud.firestore {
         ])
         && request.resource.data.source == 'public-form'
         && request.resource.data.attendance in ['yes', 'no', 'maybe']
+        && request.resource.data.policeNationalGala in ['yes', 'no']
         && request.resource.data.busNeeded in ['', 'yes', 'no']
         && request.resource.data.busReturnTime in ['', '03:00', '06:00']
         && request.resource.data.status == 'active'

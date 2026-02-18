@@ -9,12 +9,16 @@ export const firebaseConfig = {
 
 export const defaultEvent = {
   coupleNames: "ANDRES & SARA",
-  eventDate: "2026-09-20T19:00:00",
-  rsvpDeadline: "2026-08-18",
-  ceremony: {
+  eventDate: "2026-07-11T19:00:00",
+  rsvpDeadline: "2026-06-20",
+  eventVenue: {
+    address: "Carretera de Almuradiel, s/n, Calzada de Calatrava, Ciudad Real, España",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Carretera+de+Almuradiel+s%2Fn%2C+Calzada+de+Calatrava%2C+Ciudad+Real"
+  },
+  church: {
     time: "19:00",
-    address: "Carretera General 420 km 177, 13433 Caracuel de Calatrava, Ciudad Real, España",
-    mapsUrl: "https://maps.google.com"
+    address: "Iglesia del Salvador del Mundo, C. Salvador del Mundo, 5, Calzada de Calatrava, Ciudad Real, España",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Iglesia+del+Salvador+del+Mundo%2C+Calle+Salvador+del+Mundo+5%2C+Calzada+de+Calatrava%2C+Ciudad+Real"
   },
   transport: {
     pickupTime: "18:00",

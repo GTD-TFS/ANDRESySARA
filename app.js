@@ -26,9 +26,20 @@ function setEventUI(data) {
     year: "numeric"
   }).toUpperCase();
   document.querySelector("#saveTheDate").textContent = `Resérvate la fecha, ${eventDate.toLocaleDateString("es-ES")}`;
-  document.querySelector("#ceremonyTime").textContent = data.ceremony.time;
-  document.querySelector("#ceremonyAddress").textContent = data.ceremony.address;
-  document.querySelector("#ceremonyMapLink").href = data.ceremony.mapsUrl;
+  const eventVenue = data.eventVenue || {
+    address: data.ceremony?.address || defaultEvent.eventVenue.address,
+    mapsUrl: data.ceremony?.mapsUrl || defaultEvent.eventVenue.mapsUrl
+  };
+  const church = data.church || {
+    time: data.ceremony?.time || defaultEvent.church.time,
+    address: defaultEvent.church.address,
+    mapsUrl: defaultEvent.church.mapsUrl
+  };
+  document.querySelector("#eventVenueAddress").textContent = eventVenue.address;
+  document.querySelector("#eventVenueMapLink").href = eventVenue.mapsUrl;
+  document.querySelector("#churchTime").textContent = church.time;
+  document.querySelector("#churchAddress").textContent = church.address;
+  document.querySelector("#churchMapLink").href = church.mapsUrl;
   document.querySelector("#pickupTime").textContent = data.transport.pickupTime;
   document.querySelector("#pickupAddress").textContent = data.transport.pickupAddress;
   document.querySelector("#pickupMapLink").href = data.transport.pickupMapUrl;

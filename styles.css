@@ -108,6 +108,11 @@ h1 {
   text-align: center;
 }
 
+.location-cards {
+  display: grid;
+  gap: 14px;
+}
+
 .venue-photo {
   width: 100%;
   height: clamp(240px, 46vw, 460px);

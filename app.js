@@ -15,7 +15,6 @@ const db = getFirestore(app);
 const form = document.querySelector("#rsvpForm");
 const statusEl = document.querySelector("#formStatus");
 const submitBtn = document.querySelector("#submitBtn");
-const attendanceOnly = document.querySelectorAll(".attendance-only");
 
 function setEventUI(data) {
   document.querySelector("#coupleNames").textContent = data.coupleNames;
@@ -75,17 +74,6 @@ async function sha256Hex(value) {
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-function handleAttendanceVisibility(attendance) {
-  const show = attendance === "yes";
-  attendanceOnly.forEach((block) => {
-    block.style.display = show ? "grid" : "none";
-  });
-}
-
-document.querySelectorAll("input[name='attendance']").forEach((radio) => {
-  radio.addEventListener("change", () => handleAttendanceVisibility(radio.value));
-});
-
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   statusEl.textContent = "Enviando...";
@@ -136,7 +124,6 @@ form.addEventListener("submit", async (event) => {
   try {
     await setDoc(doc(collection(db, "responses"), dedupeKey), payload);
     form.reset();
-    handleAttendanceVisibility("");
     statusEl.textContent = "Respuesta registrada. Gracias.";
   } catch (error) {
     statusEl.textContent = "No se pudo enviar. Si ya enviaste, revisaremos tu respuesta en admin.";
@@ -147,4 +134,3 @@ form.addEventListener("submit", async (event) => {
 });
 
 loadSettings();
-handleAttendanceVisibility("");

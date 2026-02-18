@@ -37,7 +37,7 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--line);
   background:
     linear-gradient(to top, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0)),
-    url("./assets/pareja.jpg") center 38% / cover no-repeat;
+    url("./pareja.jpg") center 38% / cover no-repeat;
 }
 
 .top-nav {
@@ -113,7 +113,7 @@ h1 {
   height: clamp(240px, 46vw, 460px);
   margin: 0 0 18px;
   border: 1px solid var(--line);
-  background: url("./assets/piscina.jpg") center / cover no-repeat;
+  background: url("./piscina.jpg") center / cover no-repeat;
 }
 
 .card h4 {

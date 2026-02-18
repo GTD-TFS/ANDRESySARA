@@ -9,7 +9,7 @@ Web RSVP pública con Firebase (Spark) + panel admin para la novia.
 
 ## Requisitos (una sola vez en Firebase Console)
 1. Activar Firestore API y crear base de datos en modo `Native`.
-2. Activar Authentication -> `GitHub`.
+2. Activar Authentication -> `Email/Password`.
 3. En `Firestore -> Data`, crear documento `admins/<TU_UID>` con:
    - `enabled: true`
    - `email: "tu-email"`

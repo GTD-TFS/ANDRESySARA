@@ -1,9 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import {
   getAuth,
-  GithubAuthProvider,
   onAuthStateChanged,
-  signInWithPopup,
+  signInWithEmailAndPassword,
   signOut
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import {
@@ -21,7 +20,10 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+const loginForm = document.querySelector("#loginForm");
 const loginBtn = document.querySelector("#loginBtn");
+const emailInput = document.querySelector("#emailInput");
+const passwordInput = document.querySelector("#passwordInput");
 const logoutBtn = document.querySelector("#logoutBtn");
 const adminStatus = document.querySelector("#adminStatus");
 const kpis = document.querySelector("#kpis");
@@ -84,22 +86,23 @@ let unsubscribe = null;
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    loginBtn.style.display = "inline-block";
+    loginForm.style.display = "grid";
     logoutBtn.style.display = "none";
     kpis.style.display = "none";
     tableWrap.style.display = "none";
     if (unsubscribe) unsubscribe();
-    setStatus("Inicia sesión para ver respuestas.");
+    setStatus("Inicia sesión con correo para ver respuestas.");
     return;
   }
 
   const allowed = await isAdmin(user.uid);
   if (!allowed) {
     setStatus("Tu cuenta no tiene permisos de admin.");
+    await signOut(auth);
     return;
   }
 
-  loginBtn.style.display = "none";
+  loginForm.style.display = "none";
   logoutBtn.style.display = "inline-block";
   kpis.style.display = "grid";
   tableWrap.style.display = "block";
@@ -108,13 +111,16 @@ onAuthStateChanged(auth, async (user) => {
   unsubscribe = listenResponses();
 });
 
-loginBtn.addEventListener("click", async () => {
+loginForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  loginBtn.disabled = true;
   try {
-    const provider = new GithubAuthProvider();
-    await signInWithPopup(auth, provider);
+    await signInWithEmailAndPassword(auth, emailInput.value.trim(), passwordInput.value);
   } catch (error) {
-    setStatus("No se pudo iniciar sesión con GitHub.");
+    setStatus("No se pudo iniciar sesión con email/contraseña.");
     console.error(error);
+  } finally {
+    loginBtn.disabled = false;
   }
 });
 

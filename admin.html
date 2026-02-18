@@ -14,12 +14,17 @@
       <section class="admin-head">
         <h1>Panel Novia</h1>
         <div>
-          <button id="loginBtn">Entrar con GitHub</button>
           <button id="logoutBtn" style="display:none">Cerrar sesión</button>
         </div>
       </section>
 
-      <p id="adminStatus">Inicia sesión para ver respuestas.</p>
+      <form id="loginForm" class="rsvp-form" style="margin-bottom: 18px;">
+        <label>Email admin<input type="email" id="emailInput" required /></label>
+        <label>Contraseña<input type="password" id="passwordInput" required /></label>
+        <button type="submit" id="loginBtn">Entrar</button>
+      </form>
+
+      <p id="adminStatus">Inicia sesión con correo para ver respuestas.</p>
 
       <section class="kpis" id="kpis" style="display:none">
         <article class="kpi"><h3>Total</h3><p id="kpiTotal">0</p></article>

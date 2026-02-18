@@ -9,7 +9,7 @@ export const firebaseConfig = {
 
 export const defaultEvent = {
   coupleNames: "ANDRES & SARA",
-  eventDate: "2026-07-11T19:00:00",
+  eventDate: "2026-06-11T19:00:00",
   rsvpDeadline: "2026-06-20",
   eventVenue: {
     name: "Finca El Capricho",

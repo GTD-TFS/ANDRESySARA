@@ -14,6 +14,7 @@
       <section class="admin-head">
         <h1>Panel Novia</h1>
         <div>
+          <button id="exportBtn" style="display:none">Descargar CSV</button>
           <button id="logoutBtn" style="display:none">Cerrar sesión</button>
         </div>
       </section>
@@ -46,13 +47,61 @@
               <th>Acomp.</th>
               <th>Bus</th>
               <th>Plato</th>
+              <th>Música</th>
               <th>Dieta</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody id="responsesBody"></tbody>
         </table>
       </section>
+
+      <section id="cardsWrap" class="admin-cards" style="display:none"></section>
     </main>
+
+    <dialog id="editDialog">
+      <form id="editForm" class="rsvp-form" method="dialog">
+        <h2>Editar invitado</h2>
+        <input type="hidden" id="editId" />
+        <label>Nombre completo<input type="text" id="editFullName" /></label>
+        <label>Asistencia
+          <select id="editAttendance">
+            <option value="yes">Sí</option>
+            <option value="maybe">Quizás</option>
+            <option value="no">No</option>
+          </select>
+        </label>
+        <label>Policía Nac. gala
+          <select id="editPoliceNationalGala">
+            <option value="yes">Sí</option>
+            <option value="no">No</option>
+          </select>
+        </label>
+        <label>Acompañantes<input type="number" id="editCompanionsCount" min="0" max="8" /></label>
+        <label>Bus
+          <select id="editBusNeeded">
+            <option value="">-</option>
+            <option value="yes">Sí</option>
+            <option value="no">No</option>
+          </select>
+        </label>
+        <label>Vuelta bus
+          <select id="editBusReturnTime">
+            <option value="">-</option>
+            <option value="03:00">03:00</option>
+            <option value="06:00">06:00</option>
+          </select>
+        </label>
+        <label>Plato<input type="text" id="editMainDish" /></label>
+        <label>Canción<input type="text" id="editSongRequest" /></label>
+        <label>Dieta / Alergias<textarea id="editDietaryNotes" rows="3"></textarea></label>
+        <label>Comentarios<textarea id="editComments" rows="3"></textarea></label>
+        <div class="dialog-actions">
+          <button value="cancel" type="button" id="cancelEditBtn">Cancelar</button>
+          <button id="saveEditBtn" type="submit">Guardar cambios</button>
+        </div>
+      </form>
+    </dialog>
 
     <script type="module" src="./admin.js"></script>
   </body>

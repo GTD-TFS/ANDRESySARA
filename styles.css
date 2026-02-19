@@ -65,9 +65,13 @@ h1 {
 }
 
 #coupleNames {
-  font-family: "Bodoni Moda", "Abhaya Libre", Georgia, serif;
-  letter-spacing: 0.02em;
-  font-weight: 700;
+  font-family: "Cormorant Garamond", "Bodoni Moda", "Abhaya Libre", Georgia, serif;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  font-size: clamp(3rem, 9vw, 5.8rem);
+  line-height: 1.08;
+  color: #3f2d28;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .date {
@@ -119,6 +123,12 @@ h1 {
   gap: 14px;
 }
 
+.ceremony-card {
+  text-align: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
 .venue-photo {
   width: 100%;
   height: clamp(240px, 46vw, 460px);
@@ -142,7 +152,22 @@ h1 {
   font-size: 2rem;
 }
 
-.intro { font-size: 1.55rem; }
+.intro {
+  font-family: "Montserrat", "Barlow Condensed", sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.75;
+  color: #3f3937;
+  width: 100%;
+  text-align: justify;
+  text-wrap: pretty;
+}
+
+.intro-thanks {
+  display: block;
+  text-align: center;
+  margin-top: 6px;
+  font-weight: 500;
+}
 
 .rsvp-form {
   display: grid;
@@ -210,6 +235,46 @@ button:hover { background: rgba(173, 140, 130, 0.1); }
   height: 1px !important;
   opacity: 0 !important;
   pointer-events: none !important;
+}
+
+.interest-link-wrap {
+  margin: 0;
+  text-align: center;
+}
+
+.interest-link {
+  display: inline-block;
+  font-family: "Barlow Condensed", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 3px;
+}
+
+.interest-page {
+  min-height: 100vh;
+  padding: 20px 14px 40px;
+}
+
+.interest-shell {
+  width: min(940px, calc(100% - 12px));
+  margin: 0 auto;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 14px;
+}
+
+.interest-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.interest-image {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .footer {

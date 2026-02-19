@@ -9,8 +9,8 @@ export const firebaseConfig = {
 
 export const defaultEvent = {
   coupleNames: "ANDRES & SARA",
-  eventDate: "2026-06-11T19:00:00",
-  rsvpDeadline: "2026-06-20",
+  eventDate: "2026-07-11T19:00:00",
+  rsvpDeadline: "2026-07-04",
   eventVenue: {
     name: "Finca El Capricho",
     address: "Carretera de Almuradiel, s/n, Calzada de Calatrava, Ciudad Real, España",

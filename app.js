@@ -90,6 +90,7 @@ form.addEventListener("submit", async (event) => {
   const lastName = String(fd.get("lastName") || "").trim();
   const contactRef = String(fd.get("contactRef") || "").trim();
   const policeNationalGala = String(fd.get("policeNationalGala") || "");
+  const lodgingPlace = String(fd.get("lodgingPlace") || "");
   const normalizedKey = `${normalizeText(firstName)}|${normalizeText(lastName)}|${normalizeText(contactRef)}`;
   const dedupeKey = await sha256Hex(normalizedKey);
 
@@ -121,6 +122,7 @@ form.addEventListener("submit", async (event) => {
     contactRef,
     attendance,
     policeNationalGala,
+    lodgingPlace,
     companionsCount: Number(fd.get("companionsCount") || 0),
     dietaryRestriction: fd.get("dietaryRestriction") === "on",
     dietaryNotes: String(fd.get("dietaryNotes") || "").trim(),
@@ -133,7 +135,7 @@ form.addEventListener("submit", async (event) => {
     status: "active"
   };
 
-  if (!attendance || !firstName || !lastName || !contactRef || !policeNationalGala) {
+  if (!attendance || !firstName || !lastName || !contactRef || !policeNationalGala || !lodgingPlace) {
     statusEl.textContent = "Revisa los campos obligatorios.";
     submitBtn.disabled = false;
     return;

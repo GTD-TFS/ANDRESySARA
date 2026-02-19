@@ -41,6 +41,7 @@ const editId = document.querySelector("#editId");
 const editFullName = document.querySelector("#editFullName");
 const editAttendance = document.querySelector("#editAttendance");
 const editPoliceNationalGala = document.querySelector("#editPoliceNationalGala");
+const editLodgingPlace = document.querySelector("#editLodgingPlace");
 const editCompanionsCount = document.querySelector("#editCompanionsCount");
 const editBusNeeded = document.querySelector("#editBusNeeded");
 const editBusReturnTime = document.querySelector("#editBusReturnTime");
@@ -59,6 +60,12 @@ function setStatus(message) {
 function csvEscape(value) {
   const s = String(value ?? "").replaceAll('"', '""');
   return `"${s}"`;
+}
+
+function lodgingLabel(value) {
+  if (value === "ciudad_real") return "Ciudad Real";
+  if (value === "calzada_de_calatrava") return "Calzada de Calatrava";
+  return "-";
 }
 
 function updateKPIs(items) {
@@ -87,6 +94,7 @@ function renderRows(items) {
       <td>${r.fullName ?? ""}</td>
       <td>${r.attendance ?? ""}</td>
       <td>${r.policeNationalGala === "yes" ? "Sí" : "No"}</td>
+      <td>${lodgingLabel(r.lodgingPlace)}</td>
       <td>${r.companionsCount ?? 0}</td>
       <td>${r.busNeeded ?? ""} ${r.busReturnTime ?? ""}</td>
       <td>${r.mainDish ?? ""}</td>
@@ -112,6 +120,7 @@ function renderCards(items) {
       <p><strong>Fecha:</strong> ${created}</p>
       <p><strong>Asistencia:</strong> ${r.attendance ?? ""}</p>
       <p><strong>Policía Nac. gala:</strong> ${r.policeNationalGala === "yes" ? "Sí" : "No"}</p>
+      <p><strong>Alojamiento:</strong> ${lodgingLabel(r.lodgingPlace)}</p>
       <p><strong>Acompañantes:</strong> ${r.companionsCount ?? 0}</p>
       <p><strong>Bus:</strong> ${r.busNeeded ?? ""} ${r.busReturnTime ?? ""}</p>
       <p><strong>Plato:</strong> ${r.mainDish ?? ""}</p>
@@ -133,6 +142,7 @@ function downloadCsv(items) {
     "Nombre",
     "Asistencia",
     "PoliciaNacionalGala",
+    "Alojamiento",
     "Acompanantes",
     "BusNecesario",
     "HoraVueltaBus",
@@ -149,6 +159,7 @@ function downloadCsv(items) {
     r.fullName ?? "",
     r.attendance ?? "",
     r.policeNationalGala ?? "",
+    lodgingLabel(r.lodgingPlace),
     r.companionsCount ?? 0,
     r.busNeeded ?? "",
     r.busReturnTime ?? "",
@@ -175,6 +186,7 @@ function openEditDialog(item) {
   editFullName.value = item.fullName ?? "";
   editAttendance.value = item.attendance ?? "yes";
   editPoliceNationalGala.value = item.policeNationalGala ?? "no";
+  editLodgingPlace.value = item.lodgingPlace ?? "ciudad_real";
   editCompanionsCount.value = String(item.companionsCount ?? 0);
   editBusNeeded.value = item.busNeeded ?? "";
   editBusReturnTime.value = item.busReturnTime ?? "";
@@ -299,6 +311,7 @@ editForm.addEventListener("submit", async (event) => {
     fullName: editFullName.value.trim(),
     attendance: editAttendance.value,
     policeNationalGala: editPoliceNationalGala.value,
+    lodgingPlace: editLodgingPlace.value,
     companionsCount: Number(editCompanionsCount.value || 0),
     busNeeded: editBusNeeded.value,
     busReturnTime: editBusReturnTime.value,

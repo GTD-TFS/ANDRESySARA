@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Andres & Sara | Boda</title>
-    <meta name="description" content="Andres & Sara - 11 de junio de 2026. Confirma tu asistencia y consulta toda la información de la boda." />
+    <meta name="description" content="Andres & Sara - 11 de julio de 2026. Confirma tu asistencia y consulta toda la información de la boda." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Andres & Sara" />
     <meta property="og:title" content="Andres & Sara | Boda" />
-    <meta property="og:description" content="11 de junio de 2026. Te esperamos para celebrar nuestra boda." />
+    <meta property="og:description" content="11 de julio de 2026. Te esperamos para celebrar nuestra boda." />
     <meta property="og:url" content="https://gtd-tfs.github.io/ANDRESySARA/" />
     <meta property="og:image" content="https://gtd-tfs.github.io/ANDRESySARA/og-natural.jpg?v=1" />
     <meta property="og:image:secure_url" content="https://gtd-tfs.github.io/ANDRESySARA/og-natural.jpg?v=1" />
@@ -18,11 +18,11 @@
     <meta property="og:image:alt" content="Andres y Sara en la playa al atardecer" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Andres & Sara | Boda" />
-    <meta name="twitter:description" content="11 de junio de 2026. Te esperamos para celebrar nuestra boda." />
+    <meta name="twitter:description" content="11 de julio de 2026. Te esperamos para celebrar nuestra boda." />
     <meta name="twitter:image" content="https://gtd-tfs.github.io/ANDRESySARA/og-natural.jpg?v=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700&family=Barlow+Condensed:wght@300;400;600&family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;700&family=Barlow+Condensed:wght@300;400;600&family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -36,7 +36,7 @@
       <div class="hero-inner">
         <p class="overline">Te esperamos</p>
         <h1 id="coupleNames">ANDRES & SARA</h1>
-        <p class="date" id="eventDateLabel">11 JUNIO 2026</p>
+        <p class="date" id="eventDateLabel">11 JULIO 2026</p>
       </div>
       <div class="hero-photo" aria-label="Foto de la pareja"></div>
     </header>
@@ -48,14 +48,11 @@
       </section>
 
       <section class="section" id="evento">
-        <h3 class="section-title">Ubicaciones</h3>
-        <div class="location-cards">
-          <div class="card">
-            <h4>Lugar de la ceremonia</h4>
-            <p class="time" id="churchTime">19:00</p>
-            <p id="churchAddress">Dirección pendiente</p>
-            <p><a id="churchMapLink" href="#" target="_blank" rel="noopener">Ver mapa</a></p>
-          </div>
+        <h3 class="section-title">Lugar de la ceremonia</h3>
+        <div class="card ceremony-card">
+          <p class="time" id="churchTime">19:00</p>
+          <p id="churchAddress">Dirección pendiente</p>
+          <p><a id="churchMapLink" href="#" target="_blank" rel="noopener">Ver mapa</a></p>
         </div>
 
         <h3 class="section-title celebration-title">Lugar de la celebración</h3>
@@ -80,11 +77,11 @@
       </section>
 
       <section class="section" id="rsvp">
-        <h3 class="section-title">RSVP</h3>
         <p class="intro">
           Estamos deseando compartir este día tan especial contigo. Si vendrás acompañado o acompañada, o tienes alguna
           necesidad alimentaria específica, no olvides indicarlo más abajo. Te agradeceríamos que confirmaras tu
-          asistencia antes del 4 de junio de 2026. Muchas gracias.
+          asistencia antes del 4 de julio de 2026.
+          <span class="intro-thanks">Muchas gracias.</span>
         </p>
 
         <form id="rsvpForm" class="rsvp-form">
@@ -101,12 +98,15 @@
           </fieldset>
 
           <fieldset>
+            <legend>¿Cuántos acompañantes? *</legend>
+            <input type="number" name="companionsCount" min="0" max="8" value="0" required />
+          </fieldset>
+
+          <fieldset>
             <legend>¿Eres Policía Nacional y puedes acudir con traje de gala? *</legend>
             <label><input type="radio" name="policeNationalGala" value="yes" required /> Sí</label>
             <label><input type="radio" name="policeNationalGala" value="no" /> No</label>
           </fieldset>
-
-          <label>¿Cuántos acompañantes? *<input type="number" name="companionsCount" min="0" max="8" value="0" required /></label>
 
           <label class="inline-checkbox">
             <input type="checkbox" name="dietaryRestriction" />
@@ -114,6 +114,12 @@
           </label>
 
           <label>Detalles dietéticos<textarea name="dietaryNotes" rows="3" placeholder="Alergias, intolerancias, vegetariano..."></textarea></label>
+
+          <fieldset>
+            <legend>¿Dónde te vas a alojar? *</legend>
+            <label><input type="radio" name="lodgingPlace" value="ciudad_real" required /> Ciudad Real</label>
+            <label><input type="radio" name="lodgingPlace" value="calzada_de_calatrava" /> Calzada de Calatrava</label>
+          </fieldset>
 
           <fieldset>
             <legend>Sabemos que no es la parte más divertida de la boda, pero nos haces un gran favor diciéndonos si necesitas autobús para ir a la finca. *</legend>
@@ -133,11 +139,14 @@
             <label><input type="radio" name="mainDish" value="Milhojas de solomillo con foie, jamón y boletus en salsa PX y parmentier trufada." /> Milhojas de solomillo con foie, jamón y boletus en salsa PX y parmentier trufada.</label>
           </fieldset>
 
-          <label>Y por último, queremos aprovecharnos un poco de tus gustos musicales. Una canción une mucho y seguro que hay alguna que te recuerde a nosotros. Cuéntanos cuál es y prometemos ponerla a sonar en la boda.<input type="text" name="songRequest" /></label>
+          <label>♫ Y por último, queremos aprovecharnos un poco de tus gustos musicales. Una canción une mucho y seguro que hay alguna que te recuerde a nosotros. Cuéntanos cuál es y prometemos ponerla a sonar en la boda. ♪<input type="text" name="songRequest" /></label>
           <label>Comentarios<textarea name="comments" rows="4"></textarea></label>
 
           <button type="submit" id="submitBtn">Enviar</button>
           <p class="status" id="formStatus"></p>
+          <p class="interest-link-wrap">
+            <a class="interest-link" href="./interes.html">INFORMACIÓN DE INTERÉS</a>
+          </p>
         </form>
       </section>
     </main>

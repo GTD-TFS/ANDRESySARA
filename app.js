@@ -15,6 +15,10 @@ const db = getFirestore(app);
 const form = document.querySelector("#rsvpForm");
 const statusEl = document.querySelector("#formStatus");
 const submitBtn = document.querySelector("#submitBtn");
+const formStartTime = Date.now();
+const MIN_FORM_FILL_MS = 4000;
+const MIN_BETWEEN_SUBMITS_MS = 30000;
+const LAST_SUBMIT_KEY = "boda_rsvp_last_submit";
 
 function setEventUI(data) {
   document.querySelector("#coupleNames").textContent = data.coupleNames;
@@ -80,6 +84,7 @@ form.addEventListener("submit", async (event) => {
   submitBtn.disabled = true;
 
   const fd = new FormData(form);
+  const hpValue = String(fd.get("website") || "").trim();
   const attendance = fd.get("attendance");
   const firstName = String(fd.get("firstName") || "").trim();
   const lastName = String(fd.get("lastName") || "").trim();
@@ -87,6 +92,25 @@ form.addEventListener("submit", async (event) => {
   const policeNationalGala = String(fd.get("policeNationalGala") || "");
   const normalizedKey = `${normalizeText(firstName)}|${normalizeText(lastName)}|${normalizeText(contactRef)}`;
   const dedupeKey = await sha256Hex(normalizedKey);
+
+  if (hpValue.length > 0) {
+    statusEl.textContent = "No se pudo enviar. Inténtalo de nuevo.";
+    submitBtn.disabled = false;
+    return;
+  }
+
+  if (Date.now() - formStartTime < MIN_FORM_FILL_MS) {
+    statusEl.textContent = "Espera unos segundos y vuelve a enviar.";
+    submitBtn.disabled = false;
+    return;
+  }
+
+  const lastSubmitAt = Number(window.localStorage.getItem(LAST_SUBMIT_KEY) || 0);
+  if (Date.now() - lastSubmitAt < MIN_BETWEEN_SUBMITS_MS) {
+    statusEl.textContent = "Has enviado hace un momento. Espera 30 segundos.";
+    submitBtn.disabled = false;
+    return;
+  }
 
   const payload = {
     createdAt: serverTimestamp(),
@@ -123,6 +147,7 @@ form.addEventListener("submit", async (event) => {
 
   try {
     await setDoc(doc(collection(db, "responses"), dedupeKey), payload);
+    window.localStorage.setItem(LAST_SUBMIT_KEY, String(Date.now()));
     form.reset();
     statusEl.textContent = "Respuesta registrada. Gracias.";
   } catch (error) {

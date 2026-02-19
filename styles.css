@@ -193,6 +193,14 @@ button {
 button:hover { background: rgba(173, 140, 130, 0.1); }
 
 .status { min-height: 24px; color: var(--muted); margin: 0; }
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
 
 .footer {
   text-align: center;

@@ -10,7 +10,6 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
   onSnapshot,
   orderBy,
   query,
@@ -225,9 +224,8 @@ async function handleTableAction(event) {
   }
 }
 
-async function isAdmin(uid) {
-  const adminSnap = await getDoc(doc(db, "admins", uid));
-  return adminSnap.exists() && adminSnap.data().enabled === true;
+async function isAdmin() {
+  return auth.currentUser != null;
 }
 
 function listenResponses() {
@@ -253,7 +251,7 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  const allowed = await isAdmin(user.uid);
+  const allowed = await isAdmin();
   if (!allowed) {
     setStatus("Tu cuenta no tiene permisos de admin.");
     await signOut(auth);

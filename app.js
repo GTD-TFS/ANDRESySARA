@@ -15,10 +15,16 @@ const db = getFirestore(app);
 const form = document.querySelector("#rsvpForm");
 const statusEl = document.querySelector("#formStatus");
 const submitBtn = document.querySelector("#submitBtn");
+const companionsInput = document.querySelector("input[name='companionsCount']");
+const mainDishChoices = document.querySelector("#mainDishChoices");
 const formStartTime = Date.now();
 const MIN_FORM_FILL_MS = 4000;
 const MIN_BETWEEN_SUBMITS_MS = 30000;
 const LAST_SUBMIT_KEY = "boda_rsvp_last_submit";
+const dishOptions = [
+  "Bacalao gratinado con pisto",
+  "Canelón de rabo de toro con picada de pistacho"
+];
 
 function setEventUI(data) {
   document.querySelector("#coupleNames").textContent = data.coupleNames;
@@ -45,9 +51,16 @@ function setEventUI(data) {
   document.querySelector("#churchTime").textContent = church.time;
   document.querySelector("#churchAddress").textContent = church.address;
   document.querySelector("#churchMapLink").href = church.mapsUrl;
-  document.querySelector("#pickupTime").textContent = data.transport.pickupTime;
-  document.querySelector("#pickupAddress").textContent = data.transport.pickupAddress;
-  document.querySelector("#pickupMapLink").href = data.transport.pickupMapUrl;
+  const stops = Array.isArray(data.transport?.stops) && data.transport.stops.length >= 2
+    ? data.transport.stops
+    : defaultEvent.transport.stops;
+  const [hotelStop, squareStop] = stops;
+  document.querySelector("#pickupHotelTime").textContent = hotelStop.time;
+  document.querySelector("#pickupHotelAddress").textContent = hotelStop.address;
+  document.querySelector("#pickupHotelMapLink").href = hotelStop.mapUrl;
+  document.querySelector("#pickupSquareTime").textContent = squareStop.time;
+  document.querySelector("#pickupSquareAddress").textContent = squareStop.address;
+  document.querySelector("#pickupSquareMapLink").href = squareStop.mapUrl;
 
   const diffMs = eventDate.getTime() - Date.now();
   const days = Math.max(0, Math.ceil(diffMs / (1000 * 60 * 60 * 24)));
@@ -78,6 +91,51 @@ async function sha256Hex(value) {
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+function buildDishSummary(selections) {
+  const counts = new Map();
+  selections.forEach((selection) => {
+    counts.set(selection, (counts.get(selection) || 0) + 1);
+  });
+  return [...counts.entries()].map(([dish, count]) => `${dish} x${count}`).join(" | ");
+}
+
+function renderMainDishChoices() {
+  if (!mainDishChoices || !companionsInput) return;
+  const companionsCount = Math.max(0, Math.min(8, Number(companionsInput.value || 0)));
+  const totalGuests = companionsCount + 1;
+  const previousValues = Array.from(mainDishChoices.querySelectorAll("select")).map((select) => select.value);
+  mainDishChoices.innerHTML = "";
+
+  for (let i = 0; i < totalGuests; i += 1) {
+    const wrap = document.createElement("div");
+    wrap.className = "dish-choice";
+
+    const label = document.createElement("label");
+    label.htmlFor = `mainDishChoice${i}`;
+    label.textContent = i === 0 ? "Tu plato" : `Plato acompañante ${i}`;
+
+    const select = document.createElement("select");
+    select.id = `mainDishChoice${i}`;
+    select.name = "mainDishChoice";
+
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Selecciona un plato";
+    select.appendChild(placeholder);
+
+    dishOptions.forEach((dish) => {
+      const option = document.createElement("option");
+      option.value = dish;
+      option.textContent = dish;
+      select.appendChild(option);
+    });
+
+    select.value = previousValues[i] || "";
+    wrap.append(label, select);
+    mainDishChoices.appendChild(wrap);
+  }
+}
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   statusEl.textContent = "Enviando...";
@@ -91,6 +149,9 @@ form.addEventListener("submit", async (event) => {
   const contactRef = String(fd.get("contactRef") || "").trim();
   const policeNationalGala = String(fd.get("policeNationalGala") || "");
   const lodgingPlace = String(fd.get("lodgingPlace") || "");
+  const companionsCount = Number(fd.get("companionsCount") || 0);
+  const childrenUnder14Count = Number(fd.get("childrenUnder14Count") || 0);
+  const mainDishSelections = fd.getAll("mainDishChoice").map((value) => String(value).trim()).filter(Boolean);
   const normalizedKey = `${normalizeText(firstName)}|${normalizeText(lastName)}|${normalizeText(contactRef)}`;
   const dedupeKey = await sha256Hex(normalizedKey);
 
@@ -123,12 +184,13 @@ form.addEventListener("submit", async (event) => {
     attendance,
     policeNationalGala,
     lodgingPlace,
-    companionsCount: Number(fd.get("companionsCount") || 0),
+    companionsCount,
+    childrenUnder14Count,
     dietaryRestriction: fd.get("dietaryRestriction") === "on",
     dietaryNotes: String(fd.get("dietaryNotes") || "").trim(),
     busNeeded: attendance === "yes" ? String(fd.get("busNeeded") || "") : "",
     busReturnTime: attendance === "yes" ? String(fd.get("busReturnTime") || "") : "",
-    mainDish: attendance === "yes" ? String(fd.get("mainDish") || "") : "",
+    mainDish: attendance === "yes" ? buildDishSummary(mainDishSelections) : "",
     songRequest: attendance === "yes" ? String(fd.get("songRequest") || "").trim() : "",
     comments: String(fd.get("comments") || "").trim(),
     dedupeKey,
@@ -141,7 +203,7 @@ form.addEventListener("submit", async (event) => {
     return;
   }
 
-  if (attendance === "yes" && (!payload.busNeeded || !payload.mainDish)) {
+  if (attendance === "yes" && (mainDishSelections.length !== companionsCount + 1 || !payload.busNeeded || !payload.mainDish)) {
     statusEl.textContent = "Completa transporte y plato principal.";
     submitBtn.disabled = false;
     return;
@@ -151,6 +213,7 @@ form.addEventListener("submit", async (event) => {
     await setDoc(doc(collection(db, "responses"), dedupeKey), payload);
     window.localStorage.setItem(LAST_SUBMIT_KEY, String(Date.now()));
     form.reset();
+    renderMainDishChoices();
     statusEl.textContent = "Respuesta registrada. Gracias.";
   } catch (error) {
     statusEl.textContent = "No se pudo enviar. Si ya enviaste, revisaremos tu respuesta en admin.";
@@ -160,4 +223,7 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
+companionsInput?.addEventListener("input", renderMainDishChoices);
+
 loadSettings();
+renderMainDishChoices();

@@ -22,8 +22,19 @@ export const defaultEvent = {
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Iglesia+del+Salvador+del+Mundo%2C+Calle+Salvador+del+Mundo+5%2C+Calzada+de+Calatrava%2C+Ciudad+Real"
   },
   transport: {
-    pickupTime: "18:00",
-    pickupAddress: "Plaza San Francisco, 13001 Ciudad Real, España",
-    pickupMapUrl: "https://www.google.com/maps/search/?api=1&query=Plaza+San+Francisco%2C+13001%2C+Ciudad+Real%2C+Espa%C3%B1a"
+    stops: [
+      {
+        name: "Hotel Cumbria",
+        time: "17:45",
+        address: "Carretera de Toledo, 26, 13005 Ciudad Real, España",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=Carretera+de+Toledo+26%2C+13005%2C+Ciudad+Real%2C+Espa%C3%B1a"
+      },
+      {
+        name: "Plaza de San Francisco",
+        time: "18:00",
+        address: "Plaza San Francisco, 13001 Ciudad Real, España",
+        mapUrl: "https://www.google.com/maps/search/?api=1&query=Plaza+San+Francisco%2C+13001%2C+Ciudad+Real%2C+Espa%C3%B1a"
+      }
+    ]
   }
 };

@@ -29,6 +29,7 @@ service cloud.firestore {
           'policeNationalGala',
           'lodgingPlace',
           'companionsCount',
+          'childrenUnder14Count',
           'dietaryRestriction',
           'dietaryNotes',
           'busNeeded',
@@ -49,6 +50,9 @@ service cloud.firestore {
         && request.resource.data.companionsCount is int
         && request.resource.data.companionsCount >= 0
         && request.resource.data.companionsCount <= 8
+        && request.resource.data.childrenUnder14Count is int
+        && request.resource.data.childrenUnder14Count >= 0
+        && request.resource.data.childrenUnder14Count <= 8
         && request.resource.data.dietaryRestriction is bool
         && request.resource.data.createdAt == request.time
         && isShortString(request.resource.data.firstName, 1, 80)

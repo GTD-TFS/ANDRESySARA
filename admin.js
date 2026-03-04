@@ -43,6 +43,7 @@ const editAttendance = document.querySelector("#editAttendance");
 const editPoliceNationalGala = document.querySelector("#editPoliceNationalGala");
 const editLodgingPlace = document.querySelector("#editLodgingPlace");
 const editCompanionsCount = document.querySelector("#editCompanionsCount");
+const editChildrenUnder14Count = document.querySelector("#editChildrenUnder14Count");
 const editBusNeeded = document.querySelector("#editBusNeeded");
 const editBusReturnTime = document.querySelector("#editBusReturnTime");
 const editMainDish = document.querySelector("#editMainDish");
@@ -74,6 +75,7 @@ function updateKPIs(items) {
   const no = items.filter((r) => r.attendance === "no").length;
   const maybe = items.filter((r) => r.attendance === "maybe").length;
   const companions = items.reduce((acc, r) => acc + (Number(r.companionsCount) || 0), 0);
+  const children = items.reduce((acc, r) => acc + (Number(r.childrenUnder14Count) || 0), 0);
   const busYes = items.filter((r) => r.busNeeded === "yes").length;
 
   document.querySelector("#kpiTotal").textContent = String(total);
@@ -81,6 +83,7 @@ function updateKPIs(items) {
   document.querySelector("#kpiNo").textContent = String(no);
   document.querySelector("#kpiMaybe").textContent = String(maybe);
   document.querySelector("#kpiCompanions").textContent = String(companions);
+  document.querySelector("#kpiChildren").textContent = String(children);
   document.querySelector("#kpiBusYes").textContent = String(busYes);
 }
 
@@ -96,6 +99,7 @@ function renderRows(items) {
       <td>${r.policeNationalGala === "yes" ? "Sí" : "No"}</td>
       <td>${lodgingLabel(r.lodgingPlace)}</td>
       <td>${r.companionsCount ?? 0}</td>
+      <td>${r.childrenUnder14Count ?? 0}</td>
       <td>${r.busNeeded ?? ""} ${r.busReturnTime ?? ""}</td>
       <td>${r.mainDish ?? ""}</td>
       <td>${r.songRequest ?? ""}</td>
@@ -122,6 +126,7 @@ function renderCards(items) {
       <p><strong>Policía Nac. gala:</strong> ${r.policeNationalGala === "yes" ? "Sí" : "No"}</p>
       <p><strong>Alojamiento:</strong> ${lodgingLabel(r.lodgingPlace)}</p>
       <p><strong>Acompañantes:</strong> ${r.companionsCount ?? 0}</p>
+      <p><strong>Menores &lt;14:</strong> ${r.childrenUnder14Count ?? 0}</p>
       <p><strong>Bus:</strong> ${r.busNeeded ?? ""} ${r.busReturnTime ?? ""}</p>
       <p><strong>Plato:</strong> ${r.mainDish ?? ""}</p>
       <p><strong>Música:</strong> ${r.songRequest ?? ""}</p>
@@ -144,6 +149,7 @@ function downloadCsv(items) {
     "PoliciaNacionalGala",
     "Alojamiento",
     "Acompanantes",
+    "MenoresDe14",
     "BusNecesario",
     "HoraVueltaBus",
     "PlatoPrincipal",
@@ -161,6 +167,7 @@ function downloadCsv(items) {
     r.policeNationalGala ?? "",
     lodgingLabel(r.lodgingPlace),
     r.companionsCount ?? 0,
+    r.childrenUnder14Count ?? 0,
     r.busNeeded ?? "",
     r.busReturnTime ?? "",
     r.mainDish ?? "",
@@ -188,6 +195,7 @@ function openEditDialog(item) {
   editPoliceNationalGala.value = item.policeNationalGala ?? "no";
   editLodgingPlace.value = item.lodgingPlace ?? "ciudad_real";
   editCompanionsCount.value = String(item.companionsCount ?? 0);
+  editChildrenUnder14Count.value = String(item.childrenUnder14Count ?? 0);
   editBusNeeded.value = item.busNeeded ?? "";
   editBusReturnTime.value = item.busReturnTime ?? "";
   editMainDish.value = item.mainDish ?? "";
@@ -313,6 +321,7 @@ editForm.addEventListener("submit", async (event) => {
     policeNationalGala: editPoliceNationalGala.value,
     lodgingPlace: editLodgingPlace.value,
     companionsCount: Number(editCompanionsCount.value || 0),
+    childrenUnder14Count: Number(editChildrenUnder14Count.value || 0),
     busNeeded: editBusNeeded.value,
     busReturnTime: editBusReturnTime.value,
     mainDish: editMainDish.value.trim(),

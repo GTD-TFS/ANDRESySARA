@@ -177,6 +177,26 @@ h1 {
   padding: 24px;
 }
 
+.field-note {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.dish-choices {
+  display: grid;
+  gap: 12px;
+}
+
+.dish-choice {
+  display: grid;
+  gap: 6px;
+}
+
+.dish-choice label {
+  font-size: 1.05rem;
+}
+
 label { display: grid; gap: 8px; font-size: 1.35rem; }
 
 input, textarea, select {
@@ -242,14 +262,43 @@ button:hover { background: rgba(173, 140, 130, 0.1); }
   text-align: center;
 }
 
+.interest-panel {
+  border: 1px solid rgba(173, 140, 130, 0.55);
+  background: linear-gradient(180deg, rgba(244, 236, 230, 0.9), rgba(255, 255, 255, 0.98));
+  padding: 18px 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.interest-panel-title {
+  margin: 0;
+  text-align: center;
+  font-family: "Barlow Condensed", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.25rem;
+  color: #5b433c;
+}
+
+.interest-panel-copy {
+  margin: 0;
+  text-align: center;
+  font-family: "Montserrat", "Barlow Condensed", sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
 .interest-link {
   display: inline-block;
   font-family: "Barlow Condensed", sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 1.2rem;
-  border-bottom: 1px solid var(--accent);
-  padding-bottom: 3px;
+  border: 2px solid var(--accent);
+  background: rgba(173, 140, 130, 0.08);
+  padding: 10px 18px;
+  min-width: 240px;
 }
 
 .interest-page {

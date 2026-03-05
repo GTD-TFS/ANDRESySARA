@@ -47,7 +47,7 @@ function setEventUI(data) {
   };
   document.querySelector("#eventVenueName").textContent = eventVenue.name || defaultEvent.eventVenue.name;
   document.querySelector("#eventVenueAddress").textContent = eventVenue.address;
-  document.querySelector("#eventVenueMapLink").href = eventVenue.mapsUrl;
+  document.querySelector("#eventVenueMapLink").href = defaultEvent.eventVenue.mapsUrl;
   document.querySelector("#churchTime").textContent = church.time;
   document.querySelector("#churchAddress").textContent = church.address;
   document.querySelector("#churchMapLink").href = church.mapsUrl;
@@ -57,7 +57,7 @@ function setEventUI(data) {
   const [hotelStop, squareStop] = stops;
   document.querySelector("#pickupHotelTime").textContent = hotelStop.time;
   document.querySelector("#pickupHotelAddress").textContent = hotelStop.address;
-  document.querySelector("#pickupHotelMapLink").href = hotelStop.mapUrl;
+  document.querySelector("#pickupHotelMapLink").href = defaultEvent.transport.stops[0].mapUrl;
   document.querySelector("#pickupSquareTime").textContent = squareStop.time;
   document.querySelector("#pickupSquareAddress").textContent = squareStop.address;
   document.querySelector("#pickupSquareMapLink").href = squareStop.mapUrl;

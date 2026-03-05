@@ -14,7 +14,7 @@ export const defaultEvent = {
   eventVenue: {
     name: "Finca El Capricho",
     address: "Carretera de Almuradiel, s/n, Calzada de Calatrava, Ciudad Real, España",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=38.691126%2C-3.767486"
+    mapsUrl: "https://www.google.com/maps/dir/?api=1&destination=38.691126%2C-3.767486"
   },
   church: {
     time: "19:00",
@@ -27,7 +27,7 @@ export const defaultEvent = {
         name: "Hotel Cumbria",
         time: "17:45",
         address: "Carretera de Toledo, 26, 13005 Ciudad Real, España",
-        mapUrl: "https://www.google.com/maps/search/?api=1&query=Hotel+Cumbria%2C+Carretera+de+Toledo+26%2C+13005%2C+Ciudad+Real%2C+Espa%C3%B1a"
+        mapUrl: "https://www.google.com/maps/dir/?api=1&destination=38.998715%2C-3.927321"
       },
       {
         name: "Plaza de San Francisco",

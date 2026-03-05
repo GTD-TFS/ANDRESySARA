@@ -45,7 +45,7 @@ function setEventUI(data) {
     address: defaultEvent.church.address,
     mapsUrl: defaultEvent.church.mapsUrl
   };
-  document.querySelector("#eventVenueName").textContent = eventVenue.name || defaultEvent.eventVenue.name;
+  document.querySelector("#eventVenueName").textContent = "Capricho de Calatrava";
   document.querySelector("#eventVenueAddress").textContent = eventVenue.address;
   document.querySelector("#eventVenueMapLink").href = defaultEvent.eventVenue.mapsUrl;
   document.querySelector("#churchTime").textContent = church.time;

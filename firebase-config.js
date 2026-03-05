@@ -14,7 +14,7 @@ export const defaultEvent = {
   eventVenue: {
     name: "Finca El Capricho",
     address: "Carretera de Almuradiel, s/n, Calzada de Calatrava, Ciudad Real, España",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=M6RJ%2B9W%20Calzada%20de%20Calatrava"
+    mapsUrl: "https://maps.app.goo.gl/8fDk8W5a5mDWZtj6A"
   },
   church: {
     time: "19:00",
